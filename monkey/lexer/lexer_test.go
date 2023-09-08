@@ -11,7 +11,7 @@ func TestNextToken(t *testing.T) {
 let ten = 10;
 
 let add = fn(x, y) {
-  	x + y;
+  x + y;
 };
 
 let result = add(five, ten);
@@ -105,7 +105,7 @@ if (5 < 10) {
 		{token.NOT_EQ, "!="},
 		{token.INT, "9"},
 		{token.SEMICOLON, ";"},
-		//{token.EOF, ""},
+		{token.EOF, ""},
 	}
 
 	l := New(input)
