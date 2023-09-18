@@ -8,11 +8,13 @@ import (
 )
 
 type Parser struct {
-	l *lexer.Lexer
-
+	l         *lexer.Lexer
+	errors    []string
 	curToken  token.Token
 	peekToken token.Token
-	errors    []string
+
+	prefixParseFn map[token.TokenType]prefixParseFn
+	infinxParseFn map[token.TokenType]infinxParseFn
 }
 
 func New(l *lexer.Lexer) *Parser {
@@ -120,4 +122,17 @@ func (p *Parser) peekError(t token.TokenType) {
 	msg := fmt.Sprintf("expected next token to be %s, got %s instead",
 		t, p.peekToken.Type)
 	p.errors = append(p.errors, msg)
+}
+
+type (
+	prefixParseFn func() ast.Expression
+	infinxParseFn func(ast.Expression) ast.Expression
+)
+
+func (p *Parser) registerPrefix(tokenType token.TokenType, fn prefixParseFn) {
+	p.prefixParseFn[tokenType] = fn
+}
+
+func (p *Parser) registerIndix(tokenType token.TokenType, fn infinxParseFn) {
+	p.infinxParseFn[tokenType] = fn
 }
