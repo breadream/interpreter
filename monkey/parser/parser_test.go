@@ -145,7 +145,7 @@ func TestIntegerLiteralExpression(t *testing.T) {
 	checkParseErrors(t, p)
 
 	if len(program.Statements) != 1 {
-		f.Fatalf("program has not enough statements. got=%d",
+		t.Fatalf("program has not enough statements. got=%d",
 			len(program.Statements))
 	}
 	stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
