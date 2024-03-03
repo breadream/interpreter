@@ -109,19 +109,19 @@ func (l *Lexer) peekChar() byte {
 }
 
 func (l *Lexer) readIdentifier() string {
-	position := l.position
+	startPos := l.position
 	for isLetter(l.ch) {
 		l.readChar()
 	}
-	return l.input[position:l.position]
+	return l.input[startPos:l.position]
 }
 
 func (l *Lexer) readNumber() string {
-	position := l.position
+	startPos := l.position
 	for isDigit(l.ch) {
 		l.readChar()
 	}
-	return l.input[position:l.position]
+	return l.input[startPos:l.position]
 }
 
 func isLetter(ch byte) bool {
