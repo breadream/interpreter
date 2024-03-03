@@ -22,6 +22,7 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
+		// peek ahead to determine it's part of '=='
 		if l.peekChar() == '=' {
 			ch := l.ch
 			l.readChar()
@@ -35,6 +36,7 @@ func (l *Lexer) NextToken() token.Token {
 	case '-':
 		tok = newToken(token.MINUS, l.ch)
 	case '!':
+		// peek ahead to determine it's part of '!='
 		if l.peekChar() == '=' {
 			ch := l.ch
 			l.readChar()
