@@ -5,6 +5,11 @@ import (
 	"monkey/token"
 )
 
+type Identifier struct {
+	Token token.Token // the token.IDENT token
+	Value string
+}
+
 type Node interface {
 	TokenLiteral() string
 	String() string
@@ -24,7 +29,7 @@ type Program struct {
 	Statements []Statement
 }
 
-func (p *Program) TokenLiteral() string {
+func (p *Program) TokenLIteral() string {
 	if len(p.Statements) > 0 {
 		return p.Statements[0].TokenLiteral()
 	} else {
@@ -33,18 +38,13 @@ func (p *Program) TokenLiteral() string {
 }
 
 type LetStatement struct {
-	Token token.Token
+	Token token.Token // token.LET
 	Name  *Identifier
 	Value Expression // to represent an identifier as part of
 }
 
 func (ls *LetStatement) statementNode()       {}
 func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
-
-type Identifier struct {
-	Token token.Token // the token.IDENT token
-	Value string
-}
 
 func (i *Identifier) expressionNode()      {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }

@@ -18,6 +18,7 @@ let foobar = 838383;
 
 	program := p.ParseProgram()
 	checkParseErrors(t, p)
+
 	if program == nil {
 		t.Fatalf("ParseProgram() return nil")
 	}
