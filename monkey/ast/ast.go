@@ -212,7 +212,7 @@ func (ie *IfExpression) String() string {
 }
 
 type FunctionLiteral struct {
-	Token      token.Token
+	Token      token.Token // The 'fn' token
 	Parameters []*Identifier
 	Body       *BlockStatement
 }
@@ -238,7 +238,7 @@ func (fl *FunctionLiteral) String() string {
 
 type CallExpression struct {
 	Token     token.Token // The '(' token
-	Funciton  Expression  // Identifier or FunctionLiteral
+	Function  Expression  // Identifier or FunctionLiteral
 	Arguments []Expression
 }
 
@@ -252,7 +252,7 @@ func (ce *CallExpression) String() string {
 		args = append(args, a.String())
 	}
 
-	out.WriteString(ce.Funciton.String())
+	out.WriteString(ce.Function.String())
 	out.WriteString("(")
 	out.WriteString(strings.Join(args, ", "))
 	out.WriteString(")")
